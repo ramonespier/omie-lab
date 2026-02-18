@@ -23,7 +23,7 @@ class Produto extends Model {
                 allowNull: false
             },
             valorUnitario: {
-                type: DataTypes.DECIMAL(15, 4), 
+                type: DataTypes.DECIMAL(15, 2), 
                 allowNull: false,
                 defaultValue: 0
             },
@@ -35,7 +35,6 @@ class Produto extends Model {
 
             omieProdutoId: {
                 type: DataTypes.BIGINT,
-                allowNull: true,
                 unique: true,
             },
             ativo: {

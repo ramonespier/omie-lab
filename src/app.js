@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import omieRoutes from './routes/omieRoutes.js'
 import { sequelize } from './models/index.js';
+import setupCronJobs from './jobs/syncJob.js';
 
 (async () => {
     try {
@@ -19,6 +20,8 @@ import { sequelize } from './models/index.js';
 })();
 
 const app = express();
+
+setupCronJobs();
 
 const PORT = process.env.PORT || 3000
 
