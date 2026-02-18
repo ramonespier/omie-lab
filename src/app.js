@@ -2,9 +2,11 @@ import dotenv from 'dotenv';
 dotenv.config()
 import express from 'express'
 import cors from 'cors'
-import omieRoutes from './routes/omieRoutes.js'
 import { sequelize } from './models/index.js';
 import setupCronJobs from './jobs/syncJob.js';
+
+import omieRoutes from './routes/omieRoutes.js'
+import userRoutes from './routes/userRoutes.js';
 
 (async () => {
     try {
@@ -45,6 +47,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/omie', omieRoutes)
+app.use('/dashboard', userRoutes)
 
 app.listen(PORT, () => {
     console.log("Servidor rodando na porta: ", PORT)

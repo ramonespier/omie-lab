@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs"
 import User from "../models/User.js"
 import sequelize from "../config/database.js"
 
@@ -19,7 +18,6 @@ async function seed() {
             console.log("Usuário já cadastrado.")
             return;
         }
-
 
         await User.create({
             name: name,
