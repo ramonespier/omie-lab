@@ -11,7 +11,7 @@ import setupCronJobs from './jobs/syncJob.js';
         await sequelize.authenticate();
         console.log("✅ Conexão OK");
 
-        // await sequelize.sync({ force: true });
+        // await sequelize.sync({ alter: true });
         // console.log("✅ Tabelas sincronizadas");
 
     } catch (err) {
@@ -23,9 +23,22 @@ const app = express();
 
 setupCronJobs();
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
+const allowedOrigins = [process.env.DEV_BACK_PORT, process.env.DEV_FRONT_PORT]
 
 app.use(express.json());
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Origem não permitida"))
+        }
+    },
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}))
 
 app.get('/', (req, res) => {
     res.status(200).json({ message: "Servidor ligado" })

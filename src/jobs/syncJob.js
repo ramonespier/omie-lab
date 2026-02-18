@@ -2,9 +2,6 @@ import cron from "node-cron";
 import OmieProductService from "../services/OmieProductService.js";
 
 const setupCronJobs = () => {
-    // Agendamento: '0 */4 * * *' -> Executa a cada 4 horas
-    // Se quiser testar agora, use '* * * * *' (a cada minuto)
-    // Formato: (minuto hora dia mes dia-da-semana)
 
     cron.schedule('* * * * *', async () => {
         const now = new Date().toLocaleDateString("pt-BR");
