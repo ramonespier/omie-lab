@@ -48,9 +48,14 @@ class AuthController {
 
             const { token: localToken, user } = await AuthService.generateSession(email);
 
-            const frontendUrl = `${process.env.FRONTEND_URL}/dashboard?token=${localToken}`
+            res.cookie("auth_token", localToken, {
+                httpOnly: true,
+                secure: false, // nao esquecer de colocar true em produção
+                sameSite: "lax",
+                maxAge: 10 * 60 * 60 * 1000 // 10h
+            })
 
-            return res.redirect(frontendUrl)
+            return res.redirect(`${process.env.FRONTEND_URL}/dashboard`)
         } catch (error) {
             console.error("Erro no callback do Stytch:", error);
             return res.status(401).json({ message: "Link de acesso inválido ou expirado" })

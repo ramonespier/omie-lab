@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import { sequelize } from './models/index.js';
 import setupCronJobs from './jobs/syncJob.js';
+import cookieParser from 'cookie-parser';
 
 import omieRoutes from './routes/omieRoutes.js'
 import userRoutes from './routes/userRoutes.js';
@@ -43,6 +44,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }))
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
     res.status(200).json({ message: "Servidor ligado" })
