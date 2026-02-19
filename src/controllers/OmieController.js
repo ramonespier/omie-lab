@@ -27,7 +27,7 @@ export default class OmieController {
         try {
             const produto = await OmieProductService.upsert(req.body)
 
-            return res.status(201).json({
+            return res.status(200).json({
                 message: "Produto sincronizado com sucesso",
                 data: produto
             })

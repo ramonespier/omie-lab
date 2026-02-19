@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 class AuthMiddleware {
-    async verifyToken(req, res, next) {
+    async protect(req, res, next) {
         const authHeader = req.headers.authorization;
 
         if (!authHeader) {

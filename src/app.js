@@ -8,6 +8,8 @@ import setupCronJobs from './jobs/syncJob.js';
 import omieRoutes from './routes/omieRoutes.js'
 import userRoutes from './routes/userRoutes.js';
 
+import AuthMiddleware from './middlewares/AuthMiddleware.js';
+
 (async () => {
     try {
         await sequelize.authenticate();
@@ -46,8 +48,8 @@ app.get('/', (req, res) => {
     res.status(200).json({ message: "Servidor ligado" })
 })
 
-app.use('/omie', omieRoutes)
-app.use('/dashboard', userRoutes)
+app.use('/omie', AuthMiddleware.protect, omieRoutes)
+app.use('/auth', userRoutes)
 
 app.listen(PORT, () => {
     console.log("Servidor rodando na porta: ", PORT)

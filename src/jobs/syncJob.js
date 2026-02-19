@@ -3,7 +3,7 @@ import OmieProductService from "../services/OmieProductService.js";
 
 const setupCronJobs = () => {
 
-    cron.schedule('* * * * *', async () => {
+    cron.schedule('*/30 * * * *', async () => {
         const now = new Date().toLocaleDateString("pt-BR");
         console.log(`[${now}] 🕒 Iniciando sincronização automática com Omie...`)
 

@@ -9,8 +9,9 @@ async function seed() {
         await User.sync()
 
         const name = 'ramon'
-        const email = "ramon.coelhomelo@gmail.com"
-        const password = 'senha123'
+        const email = "ramon.coelhomelo@outlook.com"
+        const role = 'admin'
+        const status = 'ativo'
 
         const exists = await User.findOne({ where: { email } })
 
@@ -22,7 +23,8 @@ async function seed() {
         await User.create({
             name: name,
             email: email,
-            password: password
+            role: role,
+            status: status
         })
 
         console.log(`✅ Usuário '${name}' criado com sucesso!`);
